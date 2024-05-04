@@ -34,7 +34,9 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        animator.SetBool("isOpen", true);
         temporalyDialogue = dialogue;
+
         nameText.text = dialogue.nameNPC;
         visual.sprite = dialogue.visualOfCatSpeaker;
 
@@ -76,8 +78,9 @@ public class DialogueManager : MonoBehaviour
         animator.SetBool("isOpen", false);
         if(dialogue.addCat == true)
         {
-            modificationOfCollectionOfCats.newCatAdd = temporalyDialogue.newCat;
+            modificationOfCollectionOfCats.newCatAdd.cat = temporalyDialogue.newCat;
             modificationOfCollectionOfCats.checker = true;
+            DataPlayer.instance.NextAdventure();
         }
     }
 }

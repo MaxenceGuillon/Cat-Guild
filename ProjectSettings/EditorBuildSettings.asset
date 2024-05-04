@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Adventure_Scene.unity
     guid: f9d7fd2d76c84894485d3bfe6ac50431
+  - enabled: 1
+    path: Assets/Scenes/Tournament_Scene.unity
+    guid: e1fbeae3ffc32de4c8ac78a4059235b9
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 5cf7bb24aeffce441997860cf0ae811e, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 1657252e434aa004fac750ee6f27473d, type: 2}

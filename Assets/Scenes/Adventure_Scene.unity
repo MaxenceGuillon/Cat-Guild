@@ -152,23 +152,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71f43c6431ff9cf46a1c9c990d04a171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    idDialogue: 1
-    addCat: 1
-    newCat:
-      nameOfCat: {fileID: 11400000, guid: 94aeb8df14055694cbd44769b9284e45, type: 2}
-      id: 1
-    nameNPC: Pacha
-    sentences:
-    - "Salut, je suis le premier Pnj du jeu.\nJe parle juste pour avoir un dialogue...
-      Il faut beaucoup discuter pour finir cette bo\xEEte mais \xE7a va on avance
-      bien..."
-    - "Je pense que Yuma a envie de sortir, il faudrait commencer \xE0 se pr\xE9parer
-      mais j'imagine que t'as pas envie..."
-    - "Bon, tout \xE0 l'air de fonctionner.\nJ'vais \xEAtre le premier chat qui te
-      rejoint ptit veinard!"
-    visualOfCatSpeaker: {fileID: -602149666, guid: 1ac92790609854243854677538ca3133, type: 3}
   startDialogue: 0
+  currentDialogue:
+    addCat: 0
+    newCat: {fileID: 0}
+    nameNPC: 
+    sentences: []
+    visualOfCatSpeaker: {fileID: 0}
+  animator: {fileID: 0}
+  Adventures:
+  - dialogue:
+      addCat: 1
+      newCat: {fileID: 11400000, guid: 94aeb8df14055694cbd44769b9284e45, type: 2}
+      nameNPC: Pacha
+      sentences:
+      - Salut, je suis Pacha.
+      - On va bien s'amuser.
+      - Aller, je rejoins ta guilde !
+      visualOfCatSpeaker: {fileID: -602149666, guid: 1ac92790609854243854677538ca3133, type: 3}
+    id: 0
+  - dialogue:
+      addCat: 1
+      newCat: {fileID: 11400000, guid: e7d5fb642edacc146b2d2fd9b243b410, type: 2}
+      nameNPC: Chatoudoux
+      sentences:
+      - Moi je suis Chatoudoux.
+      - "Je pr\xE9f\xE8re les appartement pour me reposer."
+      - Aller je te suis dans ton aventure.
+      visualOfCatSpeaker: {fileID: -1671338064, guid: 1ac92790609854243854677538ca3133, type: 3}
+    id: 1
 --- !u!4 &41550857
 Transform:
   m_ObjectHideFlags: 0

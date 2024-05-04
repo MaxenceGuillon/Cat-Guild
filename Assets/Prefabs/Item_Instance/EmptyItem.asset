@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b865178de6caeff429a1d835f5ac1ac2, type: 3}
-  m_Name: Tigris
+  m_Script: {fileID: 11500000, guid: 885c1836780ee5a40b54b68f43fb8e07, type: 3}
+  m_Name: EmptyItem
   m_EditorClassIdentifier: 
-  nameOfCat: Tigris
-  visual: {fileID: -660303883, guid: 1ac92790609854243854677538ca3133, type: 3}
-  descriptionOfCat: "Le roi de sa jungle qui s'\xE9ttend de son salon \xE0 la chambre."
+  nameItem: Name of item
+  visualItem: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  priceUI: 0
+  buyingPrice: 0
+  sendingPrice: 0
+  inMarket: 1
+  expAdd: 0

@@ -9,12 +9,18 @@ public class CatData : ScriptableObject
     public string nameOfCat;
     public Sprite visual;
     public string descriptionOfCat;
-}
 
-[System.Serializable]
-public class CatID
-{
-    public CatData nameOfCat;
-    public int id;
+
+    // Stats of Cat
+
+    public int moneyWin;
+
+    public int charmingMin;
+    public int procrastinatorMin;
+    public int adventurousMin;
+
+    public int charmingMax;
+    public int procrastinatorMax;
+    public int adventurousMax;
 }
 

@@ -15,3 +15,13 @@ MonoBehaviour:
   nameOfCat: Catalys
   visual: {fileID: -202006018, guid: 1ac92790609854243854677538ca3133, type: 3}
   descriptionOfCat: Un chat rare sortant uniquement le soir de pleine lune
+  moneyWin: 13
+  charming: 0
+  procrastinator: 0
+  adventurous: 0
+  charmingMin: 40
+  procrastinatorMin: 90
+  adventurousMin: 140
+  charmingMax: 60
+  procrastinatorMax: 110
+  adventurousMax: 160

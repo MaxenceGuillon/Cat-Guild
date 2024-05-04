@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b865178de6caeff429a1d835f5ac1ac2, type: 3}
-  m_Name: Mistigri
+  m_Script: {fileID: 11500000, guid: 8026a5a4178ff0f4eaf4bad9c07b1278, type: 3}
+  m_Name: CatTempo
   m_EditorClassIdentifier: 
-  nameOfCat: Mistigri
-  visual: {fileID: 2127727618, guid: 1ac92790609854243854677538ca3133, type: 3}
-  descriptionOfCat: "Un chat myst\xE9rieux venu d'un autre jeu."
+  cat: {fileID: 11400000, guid: 94aeb8df14055694cbd44769b9284e45, type: 2}
+  charming: 0
+  procrastinator: 0
+  adventurous: 0

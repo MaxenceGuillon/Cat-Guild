@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class CollectionOfCats : MonoBehaviour
 {
 
-    public List<CatData> contentOfCollectionsOfCats = new List<CatData>();
+    public List<CatInstance> contentOfCollectionsOfCats = new List<CatInstance>();
 
     public ModificationOfCollectionOfCats modificationOfCollectionOfCats;
 
@@ -39,8 +39,8 @@ public class CollectionOfCats : MonoBehaviour
 
         for (int i = 0; i < contentOfCollectionsOfCats.Count; i++)
         {
-            collectionOfCatSlotParent.GetChild(i).GetChild(0).GetComponent<Text>().text = contentOfCollectionsOfCats[i].nameOfCat;
-            collectionOfCatSlotParent.GetChild(i).GetChild(1).GetComponent<Image>().sprite = contentOfCollectionsOfCats[i].visual;
+            collectionOfCatSlotParent.GetChild(i).GetChild(0).GetComponent<Text>().text = contentOfCollectionsOfCats[i].cat.nameOfCat;
+            collectionOfCatSlotParent.GetChild(i).GetChild(1).GetComponent<Image>().sprite = contentOfCollectionsOfCats[i].cat.visual;
         }
     }
     public bool IsFull()

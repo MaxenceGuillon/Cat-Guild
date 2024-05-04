@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885c1836780ee5a40b54b68f43fb8e07, type: 3}
+  m_Name: Truite
+  m_EditorClassIdentifier: 
+  nameItem: Truite
+  visualItem: {fileID: 895703172, guid: c4140b6a1f398f74f9be4649ec8fd9cd, type: 3}
+  priceUI: 5
+  buyingPrice: 8
+  sendingPrice: 5
+  inMarket: 0
+  expAdd: 18

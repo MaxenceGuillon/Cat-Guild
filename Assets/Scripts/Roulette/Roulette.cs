@@ -10,8 +10,6 @@ public class Roulette : MonoBehaviour
 
     public List<CatData> listRewards = new List<CatData>();
 
-    public GameObject openReward;
-
     public ModificationOfCollectionOfCats modificationOfCollectionOfCats;
 
     public Text nameNewCatUI;
@@ -50,8 +48,8 @@ public class Roulette : MonoBehaviour
         {
             modificationOfCollectionOfCats.AddCat(Roulette.instance.listRewards[2]);
             modificationOfCollectionOfCats.PrintNewCatUI(Roulette.instance.listRewards[2]);
-            nameNewCatUI.text = Roulette.instance.listRewards[3].nameOfCat;
-            visualNewCatUI.sprite = Roulette.instance.listRewards[3].visual;
+            nameNewCatUI.text = Roulette.instance.listRewards[2].nameOfCat;
+            visualNewCatUI.sprite = Roulette.instance.listRewards[2].visual;
         }
         if ((rouletteResult >= 95) && (rouletteResult < 100))
         {

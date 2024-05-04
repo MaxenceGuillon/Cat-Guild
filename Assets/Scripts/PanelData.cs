@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class PanelData : MonoBehaviour
 {
-    public int indexOfButtonOfCollection;
+    public int indexOfButton;
 }

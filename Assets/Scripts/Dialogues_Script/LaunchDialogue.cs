@@ -5,8 +5,16 @@ using UnityEngine;
 public class LaunchDialogue : MonoBehaviour
 {
     public DialogueTrigger dialogueTrigger;
+
     void Start()
     {
-        dialogueTrigger.startDialogue = true;
+        if (DataPlayer.instance.AdventureCount < DataPlayer.instance.maxAdventure)
+        {
+            dialogueTrigger.startDialogue = true;
+        }
+        else
+        {
+            OpenPanels.instance.OpenDialogueComeBackLaterPanel();
+        }
     }
 }
