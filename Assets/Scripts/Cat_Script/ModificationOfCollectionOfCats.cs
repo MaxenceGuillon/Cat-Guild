@@ -6,21 +6,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
+// Loading_Scene ( in GameObject : CanvasItemsCats / CatCanvas ) 
 
 public class ModificationOfCollectionOfCats : MonoBehaviour
 {
+    // Temporaly Cat instances to modifiate the player's cats collection
     public CatInstance newCatAdd;
     public CatInstance catInstanceTempo;
-    public CatInstance newCatTest;
+    public CatInstance newCurrentCat;
 
+    // Boolean to confirm to add cat 
     public bool checker = false;
-    public bool openReward = false;
 
+    // Print new cat instance informations UI in adventure
     public Text nameNewCatUI;
     public Text descriptionNewCatUI;
     public Image visualNewCatUI;
 
+    // Print currents cat instance information UI in cats collection
     public Text currentCatName;
     public Text currentCatDescription;
     public Image currentCatVisual;
@@ -29,16 +32,9 @@ public class ModificationOfCollectionOfCats : MonoBehaviour
     public Text currentProcrastinatorStat;
     public Text currentAdventurousStat;
 
-    public GameObject openWindow;
-    public GameObject closeWindow;
-
     public CollectionOfCats collectionOfCats;
 
-    private void Start()
-    {
-       
-    }
-
+    // Print New add cat panel when player find a cat in adventure
     public void PrintNewCatUI(CatData newCatReady)
     {
         nameNewCatUI.text = newCatReady.nameOfCat;
@@ -46,55 +42,114 @@ public class ModificationOfCollectionOfCats : MonoBehaviour
         visualNewCatUI.sprite = newCatReady.visual;
     }
 
+    // Print first cat instance in player's cats collection 
     public void PrintFirstCatIU()
     {
-        if (CollectionOfCats.instance.contentOfCollectionsOfCats.Count == 0)
-        {
-            return;
-        }
-        currentCatName.text = CollectionOfCats.instance.contentOfCollectionsOfCats[0].cat.nameOfCat;
-        currentCatDescription.text = CollectionOfCats.instance.contentOfCollectionsOfCats[0].cat.descriptionOfCat;
-        currentCatVisual.sprite = CollectionOfCats.instance.contentOfCollectionsOfCats[0].cat.visual;
-        currentCatMoney.text = CollectionOfCats.instance.contentOfCollectionsOfCats[0].cat.moneyWin.ToString() + " / h";
-        currentCharmingStat.text = CollectionOfCats.instance.contentOfCollectionsOfCats[0].charming.ToString();
-        currentProcrastinatorStat.text = CollectionOfCats.instance.contentOfCollectionsOfCats[0].procrastinator.ToString();
-        currentAdventurousStat.text = CollectionOfCats.instance.contentOfCollectionsOfCats[0].adventurous.ToString();
+        if (CollectionOfCats.instance.catsCollectionContent.Count == 0) return;
+
+        currentCatName.text = CollectionOfCats.instance.catsCollectionContent[0].cat.nameOfCat;
+        currentCatDescription.text = CollectionOfCats.instance.catsCollectionContent[0].cat.descriptionOfCat;
+        currentCatVisual.sprite = CollectionOfCats.instance.catsCollectionContent[0].cat.visual;
+        currentCatMoney.text = CollectionOfCats.instance.catsCollectionContent[0].cat.moneyWin.ToString() + " / h";
+        currentCharmingStat.text = CollectionOfCats.instance.catsCollectionContent[0].charming.ToString();
+        currentProcrastinatorStat.text = CollectionOfCats.instance.catsCollectionContent[0].procrastinator.ToString();
+        currentAdventurousStat.text = CollectionOfCats.instance.catsCollectionContent[0].adventurous.ToString();
     }
 
+    // Print current cat in player's cats collection
     public void PrintCatIU(int indexOfButton)
     {
-        currentCatName.text = CollectionOfCats.instance.contentOfCollectionsOfCats[indexOfButton].cat.nameOfCat;
-        currentCatDescription.text = CollectionOfCats.instance.contentOfCollectionsOfCats[indexOfButton].cat.descriptionOfCat;
-        currentCatVisual.sprite = CollectionOfCats.instance.contentOfCollectionsOfCats[indexOfButton].cat.visual;
-        currentCatMoney.text = CollectionOfCats.instance.contentOfCollectionsOfCats[indexOfButton].cat.moneyWin.ToString() + " / h";
-        currentCharmingStat.text = CollectionOfCats.instance.contentOfCollectionsOfCats[indexOfButton].charming.ToString();
-        currentProcrastinatorStat.text = CollectionOfCats.instance.contentOfCollectionsOfCats[indexOfButton].procrastinator.ToString();
-        currentAdventurousStat.text = CollectionOfCats.instance.contentOfCollectionsOfCats[indexOfButton].adventurous.ToString();
+        currentCatName.text = CollectionOfCats.instance.catsCollectionContent[indexOfButton].cat.nameOfCat;
+        currentCatDescription.text = CollectionOfCats.instance.catsCollectionContent[indexOfButton].cat.descriptionOfCat;
+        currentCatVisual.sprite = CollectionOfCats.instance.catsCollectionContent[indexOfButton].cat.visual;
+        currentCatMoney.text = CollectionOfCats.instance.catsCollectionContent[indexOfButton].cat.moneyWin.ToString() + " / h";
+        currentCharmingStat.text = CollectionOfCats.instance.catsCollectionContent[indexOfButton].charming.ToString();
+        currentProcrastinatorStat.text = CollectionOfCats.instance.catsCollectionContent[indexOfButton].procrastinator.ToString();
+        currentAdventurousStat.text = CollectionOfCats.instance.catsCollectionContent[indexOfButton].adventurous.ToString();
     }
+
     public void AddCat(CatData newCat)
     {
-
         if (collectionOfCats.IsFull() == true)
         {
             Debug.Log("Collection full, can't take : " + newCat.name);
             return;
         }
 
+        // Creation of new cat instance stats
         catInstanceTempo.cat = newCat;
         catInstanceTempo.charming = Random.Range(newCat.charmingMin, newCat.charmingMax);
         catInstanceTempo.procrastinator = Random.Range(newCat.procrastinatorMin, newCat.procrastinatorMax);
         catInstanceTempo.adventurous = Random.Range(newCat.adventurousMin, newCat.adventurousMax);
 
-        
-        CollectionOfCats.instance.contentOfCollectionsOfCats.Add(newCatTest = ScriptableObject.CreateInstance<CatInstance>());
-        newCatTest.cat = newCat;
-        newCatTest.charming = catInstanceTempo.charming;
-        newCatTest.procrastinator = catInstanceTempo.procrastinator;
-        newCatTest.adventurous = catInstanceTempo.adventurous;
+        // Create and add cat instance in player's collection
+        CollectionOfCats.instance.catsCollectionContent.Add(newCurrentCat = ScriptableObject.CreateInstance<CatInstance>());
+        newCurrentCat.cat = newCat;
+        newCurrentCat.charming = catInstanceTempo.charming;
+        newCurrentCat.procrastinator = catInstanceTempo.procrastinator;
+        newCurrentCat.adventurous = catInstanceTempo.adventurous;
+
+        DeterminateAlphaBetaOmegaCurrentCatInstanceStats(newCurrentCat);
 
         collectionOfCats.RefreshCollectionOfCats();
     }
 
+    void DeterminateAlphaBetaOmegaCurrentCatInstanceStats(CatInstance currentCat)
+    {
+        //Determinate alphaStat of current cat
+        if ((currentCat.charming > currentCat.procrastinator) && (currentCat.charming > currentCat.adventurous))
+        {
+            currentCat.alphaStat = currentCat.charming;
+        }
+        else
+        {
+            if ((currentCat.procrastinator > currentCat.charming) && (currentCat.procrastinator > currentCat.adventurous))
+            {
+                currentCat.alphaStat = currentCat.procrastinator;
+            }
+            else
+            {
+                currentCat.alphaStat = currentCat.adventurous;
+            }
+        }
+
+        //Determinate betaStat of current cat
+        if (((currentCat.charming > currentCat.procrastinator) && (currentCat.charming < currentCat.adventurous)) || ((currentCat.charming < currentCat.procrastinator) && (currentCat.charming > currentCat.adventurous)))
+        {
+            currentCat.betaStat = currentCat.charming;
+        }
+        else
+        {
+            if (((currentCat.procrastinator > currentCat.charming) && (currentCat.procrastinator < currentCat.adventurous)) || ((currentCat.procrastinator < currentCat.charming) && (currentCat.procrastinator > currentCat.adventurous)))
+            {
+                currentCat.betaStat = currentCat.procrastinator;
+            }
+            else
+            {
+                currentCat.betaStat = currentCat.adventurous;
+            }
+        }
+
+        //Determinate omegaStat of current cat
+        if ((currentCat.charming < currentCat.procrastinator) && (currentCat.charming < currentCat.adventurous))
+        {
+            currentCat.omegaStat = currentCat.charming;
+        }
+        else
+        {
+            if ((currentCat.procrastinator < currentCat.charming) && (currentCat.procrastinator < currentCat.adventurous))
+            {
+                currentCat.omegaStat = currentCat.procrastinator;
+            }
+            else
+            {
+                currentCat.omegaStat = currentCat.adventurous;
+            }
+        }
+        //Debug.Log("AlphaStat of " + currentCat.cat.nameOfCat + " = " + currentCat.alphaStat);
+        //Debug.Log("BetaStat of " + currentCat.cat.nameOfCat + " = " + currentCat.betaStat);
+        //Debug.Log("OmegaStat of " + currentCat.cat.nameOfCat + " = " + currentCat.omegaStat);
+    }
 
     void Update()
     {
@@ -103,21 +158,6 @@ public class ModificationOfCollectionOfCats : MonoBehaviour
             AddCat(newCatAdd.cat);
             checker = false;
             PrintNewCatUI(newCatAdd.cat);
-            openReward = true;
         }
-
-        if (openReward == true)
-        {
-            openWindow.SetActive(true);
-            openReward = false;
-        }
-    }
-    public void CloseWindow()
-    {
-        closeWindow.SetActive(false);
-    }
-    public void LoadLevel(string levelName)
-    {
-        SceneManager.LoadScene(levelName);
     }
 }

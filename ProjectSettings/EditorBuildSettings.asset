@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Guild_Scene.unity
     guid: 6a3ff8a76ae9c904f8487a690f32e682
   - enabled: 1
+    path: Assets/Scenes/Map_Scene.unity
+    guid: 6b96d42ed5611e04ea46e2724681c50d
+  - enabled: 1
     path: Assets/Scenes/Adventure_Scene.unity
     guid: f9d7fd2d76c84894485d3bfe6ac50431
   - enabled: 1

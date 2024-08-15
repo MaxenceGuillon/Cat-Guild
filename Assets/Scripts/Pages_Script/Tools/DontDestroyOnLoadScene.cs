@@ -2,39 +2,28 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using Unity.VisualScripting;
 
+// Loading_Scene ( in GameObject : GameManager / DontDestroyOnLoad )
+
 public class DontDestroyOnLoadScene : MonoBehaviour
 {
+    public string main_page;
     public GameObject[] objects;
-    public CurrentSceneManager currentSceneManager;
-    public string Main_Page;
 
-
+    // Keep some elements in all scenes
     private void Awake()
     {
-        if (currentSceneManager.isPlayerPresentByDefault == true)
+        foreach (var element in objects)
         {
-
-            foreach (var element in objects)
-            {
-
-                DontDestroyOnLoad(element);
-            }
-
-            SceneManager.LoadScene(Main_Page);
-
-
+            DontDestroyOnLoad(element);
         }
-        else
+        if (GameManager.instance.inLoadingScene == true)
         {
-            foreach (var element in objects)
-            {
-
-                DontDestroyOnLoad(element);
-            }
+            SceneManager.LoadScene(main_page);
+            GameManager.instance.inLoadingScene = false;
         }
-
     }
 
+    // No necessary now, but if we need destroy one element in DontDestroyOnLoad list
     public void RemoveFromDontDestroyOnLoad()
     {
         foreach (var element in objects)

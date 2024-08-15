@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
+// Scene_Menu ( in GameObject : MenuPageCanvas )
+
 public class MainMenu : MonoBehaviour
 {
     public string levelToLoad;
     public GameObject settingsWindow;
+
+    // On clic in Start Game button : Launch Loading_Scene to set all parameters, settings, Ui etc of the game
     public void StartGame()
     {
         SceneManager.LoadScene(levelToLoad);

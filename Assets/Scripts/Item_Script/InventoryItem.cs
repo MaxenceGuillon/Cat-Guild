@@ -4,31 +4,28 @@ using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Loading_Scene ( in GameObject : InventoryItem ) 
+
 public class InventoryItem : MonoBehaviour
 {
-    public List<ItemData> collectionItem = new List<ItemData>();
-
-    public List<ItemData> listEmptyItem = new List<ItemData>();
-
-    public List<ItemData> marketItem = new List<ItemData>();
-
-    public ModificationOfInventory modificationOfInventory;
+    public List<ItemData> collectionItem = new List<ItemData>(); // Player's items collection
+    public List<ItemData> listEmptyItem = new List<ItemData>(); // Empty list to print empty item in market
+    public List<ItemData> marketItem = new List<ItemData>(); // Market's items
 
     [SerializeField]
     private Transform collectionOfItemSlotParent;
-
     [SerializeField]
     private Transform collectionOfItemInCollectionSlotParent;
-
     [SerializeField]
     private Transform marketItemSlotParent;
 
-    const int collectionItemSize = 20;
-
+    const int collectionItemSize = 20; 
     const int marketItemSize = 12;
 
+    public ModificationOfInventory modificationOfInventory;
 
     public static InventoryItem instance;
+
     private void Awake()
     {
         if (instance != null)
@@ -38,15 +35,16 @@ public class InventoryItem : MonoBehaviour
         }
         instance = this;
     }
+
     private void Start()
     {
         RefreshCollectionOfItem();
         RefreshMarketItem();
     }
 
+    // Update of UI in player's item collection in Market
     public void RefreshCollectionOfItem()
     {
-
         for (int i = 0; i < collectionItemSize; i++)
         {
             if (i < collectionItem.Count)
@@ -56,13 +54,13 @@ public class InventoryItem : MonoBehaviour
             }
             else
             {
-                
                 collectionOfItemSlotParent.GetChild(i).GetChild(0).GetComponent<Text>().text = listEmptyItem[0].nameItem;
                 collectionOfItemSlotParent.GetChild(i).GetChild(1).GetComponent<Image>().sprite = listEmptyItem[0].visualItem;
             }
         }
     }
 
+    // Update of UI in player's item collection in player's collection
     public void RefreshCollectionOfItemInCollection()
     {
 
@@ -82,6 +80,7 @@ public class InventoryItem : MonoBehaviour
         }
     }
 
+    // Update of UI in market
     public void RefreshMarketItem()
     {
 
@@ -99,6 +98,7 @@ public class InventoryItem : MonoBehaviour
             }
         }
     }
+
     public bool InventoryIsFull()
     {
         return collectionItemSize == collectionItem.Count;

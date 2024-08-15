@@ -2,30 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+// Main_Page ( in GameObject : CanvasMainPageButtons )
 
 public class MainPage : MonoBehaviour
 {
+    public Text eventTittleUpdate;
+    public GameObject eventButton;
 
-    public GameObject panelEvent;
-    public GameObject panelQuest;
+    public string tournamentScene = "Tournament_Scene";
 
+    private void Awake()
+    {
+        // Print event button in function there is an event now or not
+        if (GameManager.instance.eventNow == false) return;
+        else
+        {
+            eventTittleUpdate.text = GameManager.instance.eventTittle;
+            eventButton.SetActive(true);
+        }
+    }
+
+    //Launch Other Scene
     public void GuildButton(string levelName)
     {
         OpenPanels.instance.CloseAllPanel();
         SceneManager.LoadScene(levelName);
     }
-    public void AdventureButton(string adventureName)
+
+    public void AdventureButton(string MapScene)
         {
         OpenPanels.instance.CloseAllPanel();
-        SceneManager.LoadScene(adventureName);
-
-    }
-    public void CollectionButton()
-    {
-        OpenPanels.instance.CloseAllPanel();
-        if (panelEvent == true) CloseEventPanel();
-        if (panelQuest == true) CloseQuestPanel();
-        OpenPanels.instance.OpenCollectionPanel();
+        GameManager.instance.inMapScene = true;
+        GameManager.instance.numberOfZone = Biomes.instance.zonesList.Count;
+        SceneManager.LoadScene(MapScene);
     }
 
     public void ActivitiesButton()
@@ -33,53 +44,43 @@ public class MainPage : MonoBehaviour
 
     }
 
-    public void TournamentButton(string tournamentScene)
+    public void TournamentButton()
     {
         OpenPanels.instance.CloseAllPanel();
         SceneManager.LoadScene(tournamentScene);
     }
 
+    //Open Panel in MainPageScene
+    public void CollectionButton()
+    {
+        OpenPanels.instance.CloseAllPanel();
+        OpenPanels.instance.OpenCollectionPanel();
+    }
     public void MarketButton()
     {
         OpenPanels.instance.CloseAllPanel();
-        if (panelEvent == true) CloseEventPanel();
-        if (panelQuest == true) CloseQuestPanel();
         OpenPanels.instance.OpenMarketPanel();
     }
 
     public void QuestsButton()
     {
         OpenPanels.instance.CloseAllPanel();
-        if (panelEvent == true) CloseEventPanel();
-        if (panelQuest == true) CloseQuestPanel();
-        panelQuest.SetActive(true);
+        OpenPanels.instance.OpenQuestPanel();
     }
 
-    public void CloseQuestPanel()
-    {
-        panelQuest.SetActive(false);
-    }
 
     public void RouletteButton()
     {
         OpenPanels.instance.CloseAllPanel();
-        if (panelEvent == true) CloseEventPanel();
-        if (panelQuest == true) CloseQuestPanel();
         OpenPanels.instance.OpenRoulettePanel();
     }
 
     public void EventButton()
     {
         OpenPanels.instance.CloseAllPanel();
-        if (panelEvent == true) CloseEventPanel();
-        if (panelQuest == true) CloseQuestPanel();
-        panelEvent.SetActive(true);
+        OpenPanels.instance.OpenEventPanel();
     }
 
-    public void CloseEventPanel()
-    {
-        panelEvent.SetActive(false);
-    }
     public void AllianceButton()
     {
 

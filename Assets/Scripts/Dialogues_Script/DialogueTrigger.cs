@@ -3,47 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Adventure_Scene ( in GameObject : DialogueAdventure ) 
+
 public class DialogueTrigger : MonoBehaviour
 {
-    public bool startDialogue = false;
-
-
+    public bool startDialogue = false; // Boolean to confirm to print dialogue UI
     public Dialogue currentDialogue;
-    public Animator animator;
 
-    public List<DialogueID> Adventures = new List<DialogueID>();
+    public List<Dialogue> adventures = new List<Dialogue>(); // List to write many dialogues for the narrative designer 
 
-    public static DialogueTrigger instance;
-    
-
-    private void Awake()
+    // Check if player can access to the next dialogue
+    void Start()
     {
-        if (instance != null)
-        {
-            Debug.LogWarning("Il y a plus d'une instance de Adventures dans la scène");
-            return;
-        }
-        instance = this;
-    }
-
-    void Update()
-    {
-        if(DataPlayer.instance.AdventureCount < DataPlayer.instance.maxAdventure)
-        {
-            currentDialogue = Adventures[DataPlayer.instance.AdventureCount].dialogue;
-        }
-
-        if (startDialogue == true) 
-        {
-            TriggerDialogue(currentDialogue);
-
-            startDialogue = false;
-        }
+        if (DataPlayer.instance.AdventureCount < DataPlayer.instance.maxAdventure) startDialogue = true;
+        else OpenPanels.instance.OpenDialogueComeBackLaterPanel();
     }
 
     void TriggerDialogue(Dialogue dialogueType)
     {
-
         DialogueManager.instance.StartDialogue(dialogueType);
+    }
+
+    //Set and launch current dialogue print in panel UI
+    void Update()
+    {
+        if(DataPlayer.instance.AdventureCount < DataPlayer.instance.maxAdventure) currentDialogue = adventures[DataPlayer.instance.AdventureCount];
+        if (startDialogue == true) 
+        {
+            TriggerDialogue(currentDialogue);
+            startDialogue = false;
+        }
     }
 }

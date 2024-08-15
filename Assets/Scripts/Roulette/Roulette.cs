@@ -3,20 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Loading_Scene ( in GameObject : CanvasPanelUI / PanelManager / RoulettePanel ) 
+
 public class Roulette : MonoBehaviour
 {
+    public int rouletteResult = -1; // State machine variable of roulette
 
-    public int rouletteResult = -1;
+    public List<CatData> listRewards = new List<CatData>(); // List of cats avaible in part of roulette "cats"
 
-    public List<CatData> listRewards = new List<CatData>();
-
-    public ModificationOfCollectionOfCats modificationOfCollectionOfCats;
-
+    // UI Roulette reward
     public Text nameNewCatUI;
     public Image visualNewCatUI;
 
+    public ModificationOfCollectionOfCats modificationOfCollectionOfCats;
+    public PrintCurrentEvent printCurrentEvent;
+    public AnimationPanelEventPointWin animationPanelEventPointWin;
+
 
     public static Roulette instance;
+
     private void Awake()
     {
         if (instance != null)
@@ -26,6 +31,7 @@ public class Roulette : MonoBehaviour
         }
         instance = this;
     }
+
     public void LauchRoulette()
     {
         rouletteResult = Random.Range(1, 100);
@@ -59,5 +65,9 @@ public class Roulette : MonoBehaviour
             visualNewCatUI.sprite = Roulette.instance.listRewards[3].visual;
         }
 
+        // Case : There is event now and add event points in function
+        if (GameManager.instance.eventNow == true) DataPlayer.instance.EventPointWin(printCurrentEvent.roulettePoint);
+
+        if ((GameManager.instance.eventNow == true) && (animationPanelEventPointWin.lockToMainAnim == false)) printCurrentEvent.PrintPanelEventPointsWin(printCurrentEvent.roulettePoint);
     }
 }

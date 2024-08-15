@@ -2,38 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+// Loading_Scene ( in GameObject : CanvasPanelUI / PanelManager )
 
 public class OpenPanels : MonoBehaviour
 {
-
+    // All Panels of the game
     public GameObject panelCollection;
     public GameObject panelRoulette;
+    public GameObject panelEvent;
+    public GameObject panelEventReward;
     public GameObject panelMarket;
+    public GameObject panelQuest;
     public GameObject textDialogueComeBackLater;
-    public GameObject ComeBackLaterButton;
-    public GameObject CollectionItems;
-    public GameObject CollectionCats;
+    public GameObject comeBackLaterButton;
+    public GameObject collectionItems;
+    public GameObject collectionCats;
 
-    public static OpenPanels instance;
-
+    // Market Animations
     public Animator buyAnItemUI;
     public Animator sendAnItemUI;
 
+    // Cat or item index to print good UI in differents collections in the game
     public int indexSlotCat;
     public int indexSlotItem;
     public int indexSlotItemMarket;
+    public int indexSlotEventButton;
 
     public int indexTempo;
 
     public ModificationOfCollectionOfCats modificationOfCollectionOfCats;
-    public ModificationOfInventory  modificationOfInventory;
-
+    public ModificationOfInventory modificationOfInventory;
+    public PrintCurrentEvent printCurrentEvent;
     public InventoryItem inventoryItem;
     public CollectionOfCats collectionOfCats;
 
-    public PanelData panelDataIdCat;
-    public PanelData panelDataIdItem;
-    public PanelData panelDataIdItemMarket;
+
+    public static OpenPanels instance;
 
     private void Awake()
     {
@@ -43,18 +49,59 @@ public class OpenPanels : MonoBehaviour
             return;
         }
         instance = this;
+
+        // Print event tittle on event button in Mage_Page scene
+        if (GameManager.instance.eventNow == true)
+        {
+            printCurrentEvent.PrintCurrentEventData(printCurrentEvent.contentEventList[GameManager.instance.idCurrentEvent]);
+            GameManager.instance.eventTittle = printCurrentEvent.currentEventName.text;
+            return;
+        }
     }
 
+    private void Update()
+    {
+        // Event rewards Unlock
+
+        if ((DataPlayer.instance.currentEventPoint >= 25) && (printCurrentEvent.unlockFirstReward == false))
+        {
+            printCurrentEvent.lockFirstReward.SetActive(false);
+            printCurrentEvent.unlockFirstReward = true;
+            printCurrentEvent.PrintPanelNewReward(printCurrentEvent.contentEventList[GameManager.instance.idCurrentEvent], 0);
+        }
+
+        if ((DataPlayer.instance.currentEventPoint >= 50) && (printCurrentEvent.unlockSegondReward == false))
+        {
+            printCurrentEvent.lockSegondReward.SetActive(false);
+            printCurrentEvent.unlockSegondReward = true;
+            printCurrentEvent.PrintPanelNewReward(printCurrentEvent.contentEventList[GameManager.instance.idCurrentEvent], 1);
+        }
+
+        if ((DataPlayer.instance.currentEventPoint >= 75) && (printCurrentEvent.unlockThirdReward == false))
+        {
+            printCurrentEvent.lockThirdReward.SetActive(false);
+            printCurrentEvent.unlockThirdReward = true;
+            printCurrentEvent.PrintPanelNewReward(printCurrentEvent.contentEventList[GameManager.instance.idCurrentEvent], 2);
+        }
+
+        if ((DataPlayer.instance.currentEventPoint == 100) && (printCurrentEvent.unlockLastReward == false))
+        {
+            printCurrentEvent.lockLastReward.SetActive(false);
+            printCurrentEvent.unlockLastReward = true;
+            printCurrentEvent.PrintPanelNewReward(printCurrentEvent.contentEventList[GameManager.instance.idCurrentEvent], 3);
+        }
+    }
+
+    // Cat collection panels methods
     public void OpenCollectionPanel()
     {
         panelCollection.SetActive(true);
         modificationOfCollectionOfCats.PrintFirstCatIU();
         inventoryItem.RefreshCollectionOfItemInCollection();
-        CollectionItems.SetActive(false);
-        CollectionCats.SetActive(true);
+        collectionItems.SetActive(false);
+        collectionCats.SetActive(true);
     }
 
-   
     public void CloseCollectionPanel()
     {
         panelCollection.SetActive(false);
@@ -62,7 +109,7 @@ public class OpenPanels : MonoBehaviour
 
     public void ClicOnCatButton(int indexSlotCat)
     {
-        if (indexSlotCat > CollectionOfCats.instance.contentOfCollectionsOfCats.Count -1)
+        if (indexSlotCat > CollectionOfCats.instance.catsCollectionContent.Count -1)
         {
             return;
         }
@@ -90,6 +137,32 @@ public class OpenPanels : MonoBehaviour
         }
     }
 
+    public void ClicCollectionItemButton(int indexSlotItem)
+    {
+        inventoryItem.RefreshCollectionOfItemInCollection();
+        collectionItems.SetActive(true);
+        collectionCats.SetActive(false);
+    }
+
+    public void ClicCollectionCatsButton()
+    {
+        collectionOfCats.RefreshCollectionOfCats();
+        collectionItems.SetActive(false);
+        collectionCats.SetActive(true);
+    }
+
+    // Market panels methods
+    public void OpenMarketPanel()
+    {
+        modificationOfInventory.PrintItemIU(0);
+        panelMarket.SetActive(true);
+    }
+
+    public void CloseMarketPanel()
+    {
+        panelMarket.SetActive(false);
+    }
+
     public void ClicOnMarketItemButton(int indexSlotItemMarket)
     {
         if (indexSlotItemMarket >= InventoryItem.instance.marketItem.Count)
@@ -106,10 +179,13 @@ public class OpenPanels : MonoBehaviour
     {
             modificationOfInventory.BuyAnItem(indexTempo);
     }
+
     public void ClicOnSendingMarketButton()
     {
             modificationOfInventory.SendAnItem(indexTempo);
     }
+
+    // Roulette panels methods
     public void OpenRoulettePanel()
     {
         panelRoulette.SetActive(true);
@@ -120,47 +196,54 @@ public class OpenPanels : MonoBehaviour
         panelRoulette.SetActive(false);
     }
 
-    public void OpenMarketPanel()
+    // Event panels methods
+    public void OpenEventPanel()
     {
-        modificationOfInventory.PrintItemIU(0);
-        panelMarket.SetActive(true);
+        CloseAllPanel();
+        panelEvent.SetActive(true);
     }
 
-    public void CloseMarketPanel()
+    public void CloseEventPanel()
     {
-        panelMarket.SetActive(false);
+        panelEvent.SetActive(false);
     }
 
+    public void OpenEventRewardPanel()
+    {
+        panelEventReward.SetActive(true);
+    }
+
+    public void CloseEventRewardPanel()
+    {
+        panelEventReward.SetActive(false);
+    }
+
+    // Quest panels methods
+    public void OpenQuestPanel()
+    {
+        panelQuest.SetActive(true);
+    }
+
+    public void CloseQuestPanel()
+    {
+        panelQuest.SetActive(false);
+    }
+
+    // If player go in a zone whitout adventure
     public void OpenDialogueComeBackLaterPanel()
     {
         textDialogueComeBackLater.SetActive(true);
     }
 
-    public void ComeBackToHub(string mainPage)
-    {
-        SceneManager.LoadScene(mainPage);
-    }
-
-    public void ClicCollectionItemButton(int indexSlotItem)
-    {
-        inventoryItem.RefreshCollectionOfItemInCollection();
-        CollectionItems.SetActive(true);
-        CollectionCats.SetActive(false);
-    }
-
-    public void ClicCollectionCatsButton()
-    {
-        collectionOfCats.RefreshCollectionOfCats();
-        CollectionItems.SetActive(false);
-        CollectionCats.SetActive(true);
-    }
-
+    // Return in Mage_Page state without open panel
     public void CloseAllPanel()
     {
         if (panelCollection == true) CloseCollectionPanel();
         if (panelMarket == true) CloseMarketPanel();
         if (panelRoulette == true) CloseRoulettePanel();
         if (panelMarket == true) CloseMarketPanel();
-
+        if (panelQuest == true) CloseQuestPanel();
+        if (panelEvent == true) CloseEventPanel();
+        if (panelEventReward == true) CloseEventRewardPanel();
     }
 }

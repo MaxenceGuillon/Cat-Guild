@@ -7,13 +7,17 @@ using UnityEngine;
 
 public class ItemData : ScriptableObject
 {
+    // Main informations
     public string nameItem;
     public Sprite visualItem;
+
+    // Market informations
     public string priceUI;
     public int buyingPrice;
     public int sendingPrice;
     public bool inMarket = false;
-    public int expAdd;
 
+    // Stats add by item
+    public int expAdd;
 }
 

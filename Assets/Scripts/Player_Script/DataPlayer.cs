@@ -1,16 +1,22 @@
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Mathematics;
+
+// Loading_Scene ( in GameObject : DataPlayer ) 
 
 public class DataPlayer : MonoBehaviour
 {
+    // Coins variables
     public int coinsCount;
     public Text coinsCountText;
     public Text coinsCountMarket;
 
+    // Adventure variables
     public int AdventureCount = 0 ;
     public int maxAdventure;
 
+    // Experience and level variables
     public Image experienceUI;
     public Text playerLvlText;
     public Text playerExpText;
@@ -19,10 +25,19 @@ public class DataPlayer : MonoBehaviour
     public float maxXp = 100;
     public float rateXp = 1.2f;
 
-    public Image energieUI;
-    public Text playerEnergieText;
-    public float currentEnergie = 100;
-    public float maxEnergie = 100;
+    // Energy variables
+    public Image energyUI;
+    public Text playerEnergyText;
+    public float currentEnergy = 100;
+    public float maxEnergy = 100;
+    public bool lockProgress = false;
+
+    // Event variables
+    public int currentEventPoint = 0;
+    public int maxEventPoint;
+    public bool triggerNewEvent = false;
+    public bool checkerEvent = false;
+
 
     public static DataPlayer instance;
 
@@ -36,32 +51,33 @@ public class DataPlayer : MonoBehaviour
         instance = this;
     }
 
+    // Set UI player's data on start of game 
     private void Start()
     {
         experienceUI = GameObject.Find("CurrentExp").GetComponent<Image>();
         playerLvlText = GameObject.Find("LevelText").GetComponent<Text>();
 
-        energieUI = GameObject.Find("CurrentEnergie").GetComponent<Image>();
-        playerEnergieText = GameObject.Find("EnergieText").GetComponent<Text>();
-
-
+        energyUI = GameObject.Find("CurrentEnergie").GetComponent<Image>();
+        playerEnergyText = GameObject.Find("EnergieText").GetComponent<Text>();
     }
 
+    // Update UI player's data in game
     private void Update()
     {
         coinsCountText.text = coinsCount.ToString();
         coinsCountMarket.text = coinsCount.ToString();
         playerExpText.text = currentXp.ToString() + "/" + maxXp;
-        playerEnergieText.text = currentEnergie.ToString() + "/" + maxEnergie;
+        playerEnergyText.text = currentEnergy.ToString() + "/" + maxEnergy;
 
         float percentageExp = ((currentXp * 100) / maxXp) / 100;
         experienceUI.fillAmount = percentageExp;
 
-        float percentageEnergie = ((currentEnergie * 100) / maxEnergie) / 100;
-        energieUI.fillAmount = percentageEnergie;
+        float percentageEnergie = ((currentEnergy * 100) / maxEnergy) / 100;
+        energyUI.fillAmount = percentageEnergie;
 
         if ( Input.GetKeyDown(KeyCode.L) ) currentXp += 60;
-        if (Input.GetKeyDown(KeyCode.L)) currentEnergie = currentEnergie - 25;
+        if (Input.GetKeyDown(KeyCode.L)) currentEnergy = currentEnergy - 33;
+        if (Input.GetKeyDown(KeyCode.L)) currentEventPoint = currentEventPoint + 25;
 
         if (currentXp >= maxXp) 
         {
@@ -69,23 +85,20 @@ public class DataPlayer : MonoBehaviour
             playerLvl += 1;
             playerLvlText.text = "Level : " + playerLvl.ToString();
             currentXp = 0 + reste;
-            maxXp = RoundValue(maxXp * rateXp, 0.1f); ;
+            maxXp = math.trunc(maxXp * rateXp);
         }
 
-        if (currentEnergie > maxEnergie)
+        if (currentEnergy > maxEnergy) currentEnergy = maxEnergy;
+        if (currentEnergy < 0) currentEnergy = 0;
+
+        if ((GameManager.instance.eventNow == true) && (checkerEvent == false))
         {
-            currentEnergie = maxEnergie;
-        }
-        if (currentEnergie < 0)
-        {
-            currentEnergie = 0;
+            triggerNewEvent = true;
+            DataPlayer.instance.currentEventPoint = 0;
+            checkerEvent = true;
         }
     }
 
-    public static float RoundValue(float num, float precision)
-    {
-        return Mathf.Floor(num * precision + 0.5f) / precision;
-    }
     public void AddCoins(int count)
     {
         coinsCount += count;
@@ -94,6 +107,22 @@ public class DataPlayer : MonoBehaviour
     public void NextAdventure()
     {
         AdventureCount ++;
+    }
+
+    public void EnergyModification(float number)
+    {
+        if (currentEnergy + number < 0) lockProgress = true;
+        else currentEnergy = currentEnergy + number;
+    }
+
+    public void EventPointWin(int eventPointAdd)
+    {
+        if (currentEventPoint + eventPointAdd > maxEventPoint)
+        {
+            currentEventPoint = maxEventPoint;
+            return;
+        }
+        currentEventPoint = currentEventPoint + eventPointAdd;
     }
 }
 

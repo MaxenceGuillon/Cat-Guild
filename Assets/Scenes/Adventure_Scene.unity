@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 41550857}
   - component: {fileID: 41550856}
   m_Layer: 0
-  m_Name: Dialogue_Adventure_01
+  m_Name: DialogueAdventure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,32 +155,39 @@ MonoBehaviour:
   startDialogue: 0
   currentDialogue:
     addCat: 0
-    newCat: {fileID: 0}
+    npcCat: {fileID: 0}
     nameNPC: 
+    energyCost: 0
     sentences: []
     visualOfCatSpeaker: {fileID: 0}
-  animator: {fileID: 0}
-  Adventures:
-  - dialogue:
-      addCat: 1
-      newCat: {fileID: 11400000, guid: 94aeb8df14055694cbd44769b9284e45, type: 2}
-      nameNPC: Pacha
-      sentences:
-      - Salut, je suis Pacha.
-      - On va bien s'amuser.
-      - Aller, je rejoins ta guilde !
-      visualOfCatSpeaker: {fileID: -602149666, guid: 1ac92790609854243854677538ca3133, type: 3}
-    id: 0
-  - dialogue:
-      addCat: 1
-      newCat: {fileID: 11400000, guid: e7d5fb642edacc146b2d2fd9b243b410, type: 2}
-      nameNPC: Chatoudoux
-      sentences:
-      - Moi je suis Chatoudoux.
-      - "Je pr\xE9f\xE8re les appartement pour me reposer."
-      - Aller je te suis dans ton aventure.
-      visualOfCatSpeaker: {fileID: -1671338064, guid: 1ac92790609854243854677538ca3133, type: 3}
-    id: 1
+  adventures:
+  - addCat: 1
+    npcCat: {fileID: 11400000, guid: 94aeb8df14055694cbd44769b9284e45, type: 2}
+    nameNPC: Pacha
+    energyCost: 10
+    sentences:
+    - Salut, je suis Pacha.
+    - "je serais le premier chat \xE0 rejoindre ta guilde."
+    - "Aller, assez parl\xE9, je viens avec toi."
+    visualOfCatSpeaker: {fileID: -602149666, guid: 1ac92790609854243854677538ca3133, type: 3}
+  - addCat: 0
+    npcCat: {fileID: 11400000, guid: e7d5fb642edacc146b2d2fd9b243b410, type: 2}
+    nameNPC: Chatoudoux
+    energyCost: 12
+    sentences:
+    - Moi c'est Chatoudoux.
+    - J'ai pas envie de te rejoindre pour l'instant.
+    - On se voit plus tard. A plus!
+    visualOfCatSpeaker: {fileID: -1671338064, guid: 1ac92790609854243854677538ca3133, type: 3}
+  - addCat: 0
+    npcCat: {fileID: 11400000, guid: 8ea20c290d4028c4ea5c0317321eea75, type: 2}
+    nameNPC: Mistigri
+    energyCost: 15
+    sentences:
+    - Moi c'est Misitigri...
+    - Je viens juste tester des bugs et voir si le panel "energie insuffisante" fonctionne.
+    - Bon, normalement t'iras pas plus loin dans les dialogues, ciao!
+    visualOfCatSpeaker: {fileID: 2127727618, guid: 1ac92790609854243854677538ca3133, type: 3}
 --- !u!4 &41550857
 Transform:
   m_ObjectHideFlags: 0
@@ -208,7 +215,7 @@ GameObject:
   - component: {fileID: 671380128}
   - component: {fileID: 671380127}
   m_Layer: 5
-  m_Name: Background
+  m_Name: BackgroundZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,7 +260,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7d2c1ed0b8f574b46a3ad8de08c351dc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a31b2f1488a6be43b9a34e3ed429c37, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -284,7 +291,7 @@ GameObject:
   - component: {fileID: 1067954701}
   - component: {fileID: 1067954700}
   m_Layer: 5
-  m_Name: backgroundCanvas
+  m_Name: BackgroundCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -351,7 +358,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: -3
+  m_SortingOrder: -5
   m_TargetDisplay: 0
 --- !u!224 &1067954703
 RectTransform:
@@ -373,113 +380,9 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1001 &1262379730
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 293236280295767721, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_Name
-      value: CurrentSceneManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1041.0587
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 586.5313
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -22.895823
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
---- !u!1 &1425448330
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1425448332}
-  - component: {fileID: 1425448331}
-  m_Layer: 0
-  m_Name: LauncherDialogue
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1425448331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1425448330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75b7eac4e96889e4887ab1eb4730b552, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueTrigger: {fileID: 41550856}
---- !u!4 &1425448332
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1425448330}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 510.27597, y: 438.65826, z: -3.066866}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1067954703}
-  - {fileID: 1262379730}
   - {fileID: 41550857}
-  - {fileID: 1425448332}

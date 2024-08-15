@@ -4,21 +4,22 @@ using UnityEngine;
 using Unity.UI;
 using UnityEngine.UI;
 
-
+// Loading_Scene ( in GameObject : CollectionOfCats ) 
 
 public class CollectionOfCats : MonoBehaviour
 {
-
-    public List<CatInstance> contentOfCollectionsOfCats = new List<CatInstance>();
-
-    public ModificationOfCollectionOfCats modificationOfCollectionOfCats;
+    // Player's CatCollection
+    public List<CatInstance> catsCollectionContent = new List<CatInstance>();
 
     const int collectionSize = 24;
 
+    public ModificationOfCollectionOfCats modificationOfCollectionOfCats;
+
     [SerializeField]
-    private Transform collectionOfCatSlotParent;
+    private Transform catsCollectionSlotParent;
 
     public static CollectionOfCats instance;
+
     private void Awake()
     {
         if (instance != null)
@@ -34,17 +35,18 @@ public class CollectionOfCats : MonoBehaviour
         RefreshCollectionOfCats();
     }
 
+    // Print update of player's cats collection
     public void RefreshCollectionOfCats()
     {
-
-        for (int i = 0; i < contentOfCollectionsOfCats.Count; i++)
+        for (int i = 0; i < catsCollectionContent.Count; i++)
         {
-            collectionOfCatSlotParent.GetChild(i).GetChild(0).GetComponent<Text>().text = contentOfCollectionsOfCats[i].cat.nameOfCat;
-            collectionOfCatSlotParent.GetChild(i).GetChild(1).GetComponent<Image>().sprite = contentOfCollectionsOfCats[i].cat.visual;
+            catsCollectionSlotParent.GetChild(i).GetChild(0).GetComponent<Text>().text = catsCollectionContent[i].cat.nameOfCat;
+            catsCollectionSlotParent.GetChild(i).GetChild(1).GetComponent<Image>().sprite = catsCollectionContent[i].cat.visual;
         }
     }
+
     public bool IsFull()
     {
-        return collectionSize == contentOfCollectionsOfCats.Count;
+        return collectionSize == catsCollectionContent.Count;
     }
 }

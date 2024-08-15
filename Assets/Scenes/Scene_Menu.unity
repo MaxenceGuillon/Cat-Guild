@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 74242354}
   - component: {fileID: 74242353}
   m_Layer: 5
-  m_Name: QUIT
+  m_Name: QuitGameButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -884,7 +884,7 @@ GameObject:
   - component: {fileID: 786400073}
   - component: {fileID: 786400072}
   m_Layer: 5
-  m_Name: SETTINGS
+  m_Name: SettingsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1125,7 +1125,7 @@ GameObject:
   - component: {fileID: 843303813}
   - component: {fileID: 843303812}
   m_Layer: 5
-  m_Name: PLAY
+  m_Name: PlayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2149,63 +2149,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1345720688}
   m_CullTransparentMesh: 1
---- !u!1001 &1350915012
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 293236280295767721, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_Name
-      value: CurrentSceneManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1041.0587
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 586.5313
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -22.895823
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6720533198207746938, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0a11864ab51ba374083594f84ca024eb, type: 3}
 --- !u!1 &1351818302
 GameObject:
   m_ObjectHideFlags: 0
@@ -2995,7 +2938,7 @@ GameObject:
   - component: {fileID: 1747767660}
   - component: {fileID: 1747767659}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: CatSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3430,7 +3373,7 @@ GameObject:
   - component: {fileID: 1974018676}
   - component: {fileID: 1974018678}
   m_Layer: 5
-  m_Name: SettingsWindow
+  m_Name: SettingsWindowCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3662,7 +3605,7 @@ GameObject:
   - component: {fileID: 2040569310}
   - component: {fileID: 2040569314}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MenuPageCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3986,4 +3929,3 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 2040569313}
   - {fileID: 434660358}
-  - {fileID: 1350915012}
